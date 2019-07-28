@@ -4,7 +4,10 @@ trap {
 }
 # Assumes $PWD is the repo root
 if ($env:BUILD_SECRET_KEY) {
-    dotnet test ./UnitTestProject1/UnitTestProject1.csproj --no-build --filter "CI!=Skipped" -c Release -- RunConfiguration.TestSessionTimeout=1800000
+    dotnet test ./UnitTestProject1/UnitTestProject1.csproj `
+        --no-build --filter "CI!=Skipped" -c Release `
+        --logger "console;verbosity=normal" `
+        -- RunConfiguration.TestSessionTimeout=1800000
     Exit $LASTEXITCODE
 }
 else {
